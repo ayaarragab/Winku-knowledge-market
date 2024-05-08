@@ -1,0 +1,19 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+function addBookmark($userId,$questionId) {
+    $.ajax({
+        url: 'http://localhost/Winku-aya-s_branch/Views/index.php', // Replace 'addBookmark.php' with the actual endpoint to add a bookmark
+        type: 'POST',
+        data: { userId: $userId,
+            questionId: $questionId/* Any data you need to send to the server */ },
+        success: function(response) {
+            // Handle success
+            console.log('Bookmark added successfully');
+        },
+        error: function(xhr, status, error) {
+            // Handle error
+            console.error('Error adding bookmark:', error);
+        }
+    });
+}
+</script>

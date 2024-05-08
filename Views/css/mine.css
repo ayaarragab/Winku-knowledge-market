@@ -1,0 +1,61 @@
+.options-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    width: 250px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    position: absolute;
+    z-index: 1;
+    display: none; /* Hidden by default */
+    border-radius: 10px;
+}
+
+.options-list li {
+    padding: 8px 16px;
+    color: black;
+    cursor: pointer;
+}
+.options-list li span{
+    font-weight: bold;
+}
+.options-list li:hover {
+    background-color: #f1f1f1;
+}
+.ff{
+    justify-content: end;
+}
+.title-and-ellipse{
+    display: flex;
+    justify-content: space-between;
+}
+.title-and-ellipse i{
+    cursor: pointer;
+}
+/* User Profile */
+.add-f{
+    background-color: #088dcd !important;
+    color: #f1f1f1;
+}
+.add-btn{
+    cursor: pointer !important;
+}
+::-webkit-scrollbar {
+    width: 12px;
+}
+::-webkit-scrollbar-thumb {
+    display: none;
+    background-color: #888;
+    border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover{
+    transition: 1s;
+    display: block;
+}
+.admin-cat{
+    overflow-y: scroll !important;
+}
+.follow-cat{
+    margin-left: 10px;
+}
