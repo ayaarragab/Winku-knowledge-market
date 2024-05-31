@@ -1,7 +1,7 @@
 <?php
 class UserControllerHelper
 {
-    public static function incrementData( $uniqueIdentifier,$UniqueIdentifierName, $columnName)
+    public static function incrementData($uniqueIdentifier,$UniqueIdentifierName, $columnName)
     {
         $object=unserialize($_SESSION['user']);
         $value = intval(UserMapper::selectSpecificAttr($uniqueIdentifier ,$UniqueIdentifierName, $columnName));
@@ -9,6 +9,19 @@ class UserControllerHelper
             UserMapper::edit($uniqueIdentifier, array($columnName => ++$value),$UniqueIdentifierName);
             call_user_func([$object->builder, 'set'.ucfirst($columnName)], $value);
             $_SESSION['user']=serialize($object);
+        }
+        else {
+            echo 'Error in updating data';
+        }
+    }
+    public static function incrementDataAdmin($uniqueIdentifier,$UniqueIdentifierName, $columnName)
+    {
+        $object=unserialize($_SESSION['admin']);
+        $value = intval(UserMapper::selectSpecificAttr($uniqueIdentifier ,$UniqueIdentifierName, $columnName));
+        if (is_int($value)) {
+            UserMapper::edit($uniqueIdentifier, array($columnName => ++$value),$UniqueIdentifierName);
+            call_user_func([$object->AdminBlider, 'set'.ucfirst($columnName)], $value);
+            $_SESSION['admin']=serialize($object);
         }
         else {
             echo 'Error in updating data';

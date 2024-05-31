@@ -1,35 +1,42 @@
 <?php session_start();
-include('assests/header.php')
+include('assests/header.php');
+require_once '../Controllers/UserControllers/userMapper.php';
+$user = UserMapper::selectObjectAsArray($_GET['id'], 'id');
 ?>
 	<section>
   
-		<div class="feature-photo">
+	<div class="feature-photo">
 			<div class="add-btn">
-				<span>1205 followers</span>
-        <form class="d-inline" action="" method="post">
-          <input class="add-f btn" type="submit" name="follow" value="follow" />
-        </form>
+			<span>Followers: <?php echo $user[0]['numFollowers']; ?></span>
+			<?php if($_GET['id'] !== $_SESSION['id'])
+								{?>
+									<form class="d-inline" action="" method="post">
+									</form>
+						<?php }?>
+
       </div>
 			<div class="container-fluid">
 				<div class="row merged">
 					<div class="col-lg-2 col-sm-3">
 						<div class="user-avatar">
 							<figure>
-								<img src="images/resources/user-avatar.jpg" alt="">
-								<form class="edit-phto">
-									<i class="fa fa-camera-retro"></i>
-									<label class="fileContainer">
-										Edit Display Photo
-										<input type="file"/>
-									</label>
-								</form>
+								<img src="<?php echo $user[0]['profilePhoto']; ?>" alt="">
+							
 							</figure>
 						</div>
-					</div>
-    </section>
-<div class="coment-area"> <!-- Answers -->
+						<?php if($_GET['id']==$_SESSION['id'])
+								{?>
+									<form class="edit-phto">
+										<i class="fa fa-camera-retro"></i>
+										<label class="fileContainer">
+											Edit Display Photo
+											<input type="file"/>
+										</label>
+									</form>
+								<?php }?>
+					</div><?php require_once 'assests/profile-constant-section.php' ?>
 											
-<!--end-->
+<!--end--><section>
 		<div class="gap gray-bg">
 			<div class="container-fluid">
 				<div class="row">
@@ -173,9 +180,9 @@ include('assests/header.php')
 
 							<?php
 											include_once 'C:\xampp\htdocs\Winku-aya-s_branch\Controllers\answerController\answerToUser.php';
-
-											$username=$_SESSION['username'];
-											$answer=answerToUser::showuserAnswers($username)
+											$id=$_GET['id'];
+											$username=UserMapper::selectSpecificAttr($id,'id','username');
+											$answer=answerToUser::showuserAnswers($username);
 											?>
 							</div>
                             <!-- centerl meta -->

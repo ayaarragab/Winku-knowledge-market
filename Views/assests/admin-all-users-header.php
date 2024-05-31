@@ -336,15 +336,7 @@ if (!isset($_SESSION['id']) && !isset($_SESSION['adminOrNot'])) {
 							<a href="messages.php" title="" class="more-mesg">view more</a>
 						</div>
 					</li>
-					<li><a href="#" title="Languages" data-ripple=""><i class="fa fa-globe"></i></a>
-						<div class="dropdowns languages">
-							<a href="#" title=""><i class="ti-check"></i>English</a>
-							<a href="#" title="">Arabic</a>
-							<a href="#" title="">Dutch</a>
-							<a href="#" title="">French</a>
-						</div>
-					</li>
-					<li><a href="#" title="logout" style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 0.5px;"><i class="ti-power-off"></i><small>logout</small></a></li>
+					<?php require_once 'C:\xampp\htdocs\Winku-aya-s_branch\Views\assests\logout_part.php' ?>
 				</ul>
 				<span class="ti-menu main-menu" data-ripple=""></span>
 			</div>

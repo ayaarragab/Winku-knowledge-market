@@ -46,9 +46,12 @@ class UserBuilder extends Person
     {
         return $this->numQuestions;
     }
+    public function setPrivilgedOrNot($privilgedOrNot)
+    {
+        $this->privilgedOrNot=$privilgedOrNot;
+    }
 
-
-    public function isPrivilged()
+    public function getPrivilgedOrNot()
     {
         return $this->privilgedOrNot;
     }
@@ -86,12 +89,12 @@ class UserBuilder extends Person
     public function loginObject($id,$numQuestions, $privilgedOrNot, $numOfReports, $numOfBadges, $badges, $reputations, $suggestedCategory)
     {
         $this->setId($id);
-        $this->$numQuestions= $numQuestions;
-        $this->$privilgedOrNot= $privilgedOrNot;
-        $this->$numOfReports= $numOfReports;
-        $this->$numOfBadges=  $numOfBadges;
-        $this->$badges= $badges;
-        $this->$reputations= $reputations;
-        $this->$suggestedCategory= $suggestedCategory;
+        $this->numQuestions= $numQuestions;
+        $this->privilgedOrNot= $privilgedOrNot;
+        $this->numOfReports= $numOfReports;
+        $this->numOfBadges=  $numOfBadges;
+        $this->badges= $badges;
+        $this->reputations= $reputations;
+        $this->suggestedCategory= $suggestedCategory;
     }
 }

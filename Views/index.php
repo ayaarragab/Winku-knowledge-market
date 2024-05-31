@@ -3,7 +3,25 @@ session_start();
 require_once 'assests/header.php';
 require_once '../Controllers/questionControllers/questionToUser.php';
 require_once 'C:\xampp\htdocs\Winku-aya-s_branch\Controllers\associativeClasses\categoryUser\categoryusersMapper.php';
+require_once 'C:\xampp\htdocs\Winku-aya-s_branch\Controllers\UserControllers\userMapper.php';
+require_once 'C:\xampp\htdocs\Winku-aya-s_branch\Models\User.php';
 // require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\associativeClasses\categoryUser\categoryusersMapper.php';
+if(isset($_SESSION['id'])){
+	$user = UserMapper::retrieveObject('id', $_SESSION['id']);
+}
+
+if (isset($_GET['function']) && $_GET['function'] == 'deleteQuestion') {
+	$user->userToQuestion->deleteQuestion($_GET['id']);
+}
+elseif (isset($_GET['function']) && $_GET['function'] == 'bookmarkQuestion') {
+	$user->userToQuestion->bookmarkQuestion($_GET['id'], $_SESSION['id']);	
+}
+elseif (isset($_GET['function']) && $_GET['function'] == 'unbookmarkQuestion') {
+	$user->userToQuestion->unbookmarkQuestion($_GET['id'], $_SESSION['id']);	
+}
+elseif (isset($_GET['function']) && $_GET['function'] == 'reportQuestion') {
+	$user->userToQuestion->reportQuestion($_GET['id']);	
+}
 ?>		<section>
 			<div class="gap gray-bg">
 				<div class="container-fluid">
@@ -13,25 +31,7 @@ require_once 'C:\xampp\htdocs\Winku-aya-s_branch\Controllers\associativeClasses\
 								<div class="col-lg-3">
 									<aside class="sidebar static">
 										<div class="widget">
-												<?php
-												if (isset($_SESSION['id'])) {
-													echo '<h4 class="widget-title">Followed categories</h4>';
-													echo '<ul class="naves">';
-													$categories = CategoryusersMapper::getUserFollowedCategories($_SESSION['id']);
-													foreach ($categories as $category) {
-														echo '<li><a href="subcategories.php?categoryId=' . $category['id'] . '">' . $category['name'] . '</a></li>';
-													}}
-												else {
-													echo '<h4 class="widget-title">Categories</h4>';
-													echo '<ul class="naves">';
-													$categories = CategoryMapper::selectall();
-													foreach ($categories as $category) {
-														// echo '<li><a href="subcategories.php?categoryId=' . $category['id'] . '">' . $category['name'] . '</a></li>';
-														echo '<li><a href="landing.php">' . $category['name'] . '</a></li>';
-													}
-												}
-												?>											
-											</ul>
+											<?php require_once 'C:\xampp\htdocs\Winku-aya-s_branch\Views\followed_categories_or_all_categories.php' ?>
 										</div><!-- Shortcuts -->										
 									</aside>
 								</div><!-- sidebar -->

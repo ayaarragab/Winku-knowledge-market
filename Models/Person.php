@@ -22,7 +22,7 @@ class Person{
         $this->numAnswers = 0;
         $this->numFollowers = 0;
         $this->numFollowings = 0;
-        $this->profilePhoto = 'no photos added yet';
+        $this->profilePhoto = 'https://techcrunch.com/wp-content/uploads/2013/01/github-logo.png?w=1390&crop=1';
         $this->bio = 'no bio added yet';
         $this->country = 'no country specified yet';
         $this->professionalTitle = 'no title specified yet';

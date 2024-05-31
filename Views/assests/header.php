@@ -47,7 +47,7 @@
 						<a href="forum.php" title="">Categroies</a>
 					</li>
 					<li>
-						<a href="user-profile.php" title="">Profile</a>
+					<a href="userProfile.php?id=<?php echo $_SESSION['id'];?>" title="">Profile</a>
 					</li>
 					<li>
 						<a href="add-question.php" title=""
@@ -139,7 +139,8 @@
 						<li>
 							<?php
 							if (isset($_SESSION['id'])) {
-								echo '<a href="user-profile.php?id='.$_SESSION['id'].' title="">Profile</a>';
+								echo '<a href="userProfile.php?id='.$_SESSION['id'].'" title="">Profile</a>';
+								
 							}
 							else{
 								echo '<a href="landing.php" title="">Log in now!</a>';
@@ -152,7 +153,7 @@
 								question</a>
 						</li>
 					</ul>
-					<ul class="setting-area mt-3">
+					<ul class="setting-area mt-3 d-flex">
 						<li>
 							<a href="#" title="Home" data-ripple=""><i class="ti-search"></i></a>
 							<div class="searched">
@@ -296,21 +297,10 @@
 						</li>';
 						}
 						 ?>
-						<li><a href="#" title="Languages" data-ripple=""><i class="fa fa-globe"></i></a>
-							<div class="dropdowns languages">
-								<a href="#" title=""><i class="ti-check"></i>English</a>
-								<a href="#" title="">Arabic</a>
-								<a href="#" title="">Dutch</a>
-								<a href="#" title="">French</a>
-							</div>
-						</li>
-						<?php if (isset($_SESSION['id'])) {
-								echo '						<li><a href="logout.php" title="logout"
-								style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 0.5px;"><i
-									class="ti-power-off"></i><small>logout</small></a></li>'; 						
-								} ?>
+					<?php require_once 'C:\xampp\htdocs\Winku-aya-s_branch\Views\assests\logout_part.php' ?>
+					<span style="margin-left: 100px;" class="ti-menu main-menu" data-ripple=""></span>
+
 					</ul>
-					<span class="ti-menu main-menu" data-ripple=""></span>
 				</div>
 			</div><!-- topbar -->
 		</div>

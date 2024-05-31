@@ -13,22 +13,6 @@ require_once '../Controllers/associativeClasses/categoryUser/categoryusersMapper
 				<div class="row">
 					<div class="col-lg-9">
 						<div class="forum-warper">
-							<div class="post-filter-sec">
-								<form method="post" class="filter-form">
-									<input type="post" placeholder="Search category">
-									<button><i class="ti-search"></i></button>
-								</form>
-								<div class="purify">
-									<span>filter by</span>
-									<select>
-										<option>Assending A-Z</option>
-										<option>Desending Z-A</option>
-										<option>Desending (date)</option>
-										<option>Asending (date)</option>
-									</select>
-									<a href="#" title="">purify</a>
-								</div>
-							</div>
 							<?php if (isset($_SESSION['id'])) {
 								$user = UserMapper::selectObjectAsArray($_SESSION['id'], 'id');
 								if ($user[0]['privilgedOrNot'] == 1) {
@@ -69,7 +53,8 @@ require_once '../Controllers/associativeClasses/categoryUser/categoryusersMapper
 							}
 						}
 						$categories = CategoryMapper::selectall();
-						for ($i=0; $i < count($categories); $i++) { 
+						if ($categories) {
+							for ($i=0; $i < count($categories); $i++) { 
 								echo '<tr>';
 								echo '<td>';
 								echo '<div class="catName-and-follow-button d-flex m-0 p-0">';
@@ -92,10 +77,15 @@ require_once '../Controllers/associativeClasses/categoryUser/categoryusersMapper
 								echo '<td>'.CategoryusersMapper::getNumFollowersPerCategory($categories[$i]['id']).'</td>';
 								echo '</tr>';
 						}
+						}
+						else{
+							echo "Categories are deleted currently!";
+						}
 					}
 					else {
 						$categories = CategoryMapper::selectall();
-						for ($i=0; $i < count($categories); $i++) { 
+						if ($categories) {
+							for ($i=0; $i < count($categories); $i++) { 
 								echo '<tr>';
 								echo '<td>';
 								echo '<div class="catName-and-follow-button d-flex m-0 p-0">';
@@ -110,7 +100,7 @@ require_once '../Controllers/associativeClasses/categoryUser/categoryusersMapper
 								echo '<td>'.$categories[$i]['numberOfQuestions'].'</td>';
 								echo '<td>'.CategoryusersMapper::getNumFollowersPerCategory($categories[$i]['id']).'</td>';
 								echo '</tr>';
-						}
+						}						}
 					}
 					 ?>
             <!-- End of category block -->
@@ -213,7 +203,7 @@ require_once '../Controllers/associativeClasses/categoryUser/categoryusersMapper
 	<section>
 		<div class="getquot-baner">
 			<span>Want to join our awesome forum and start interacting with others?</span>
-			<a href="#" title="">Sign up</a>
+			<a href="landing.php" title="">Sign up</a>
 		</div>
 	</section>
 	<?php

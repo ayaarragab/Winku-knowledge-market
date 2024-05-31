@@ -10,7 +10,7 @@ class answerToUser{
             <ul class="we-comet">
                 <li>
                     <div class="comet-avatar">
-                        <img src="images/resources/comet-1.jpg" alt="">
+                        <img src="images/default-avatar-icon-of-social-media-user-vector.jpg" style="width:30px;height:30px;display:block" alt="">
                     </div>
                     <div class="we-comment">
                         <div class="coment-head">

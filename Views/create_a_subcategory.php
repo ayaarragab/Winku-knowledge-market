@@ -18,15 +18,7 @@ require_once '../Models/User.php';
 								<div class="col-lg-3">
 									<aside class="sidebar static">
 										<div class="widget">
-											<h4 class="widget-title">Followed categories</h4>
-											<ul class="naves">
-											<?php
-												$categories = CategoryusersMapper::getUserFollowedCategories($_SESSION['id']);
-												foreach ($categories as $category) {
-													echo '<li><a href="subcategories.php?subcategoryId=' . $category['id'] . '">' . $category['name'] . '</a></li>';
-												}
-												?>													
-											</ul>
+											<?php require_once 'C:\xampp\htdocs\Winku-aya-s_branch\Views\followed_categories_or_all_categories.php' ?>
 										</div><!-- Shortcuts -->										
 									</aside>
 								</div><!-- sidebar -->
@@ -39,7 +31,12 @@ require_once '../Models/User.php';
 												if (isset($_SESSION['id'])) {
 													if (isset($_POST['subcategoryName']) && isset($_POST['categoryName'])) {
 														$user = UserMapper::retrieveObject('id', $_SESSION['id']);
-														$user->userToSubcategory->createSubcategory($_POST['subcategoryName'], $_POST['categoryName'], $_SESSION['username']);
+														$categoryname=CategoryMapper::selectObjectAsArray($_POST['categoryName'],'name');
+														if($categoryname!==false){
+														$user->AdminToSubcategory->addSubCategory($_POST['subcategoryName'], $_POST['categoryName'], $_SESSION['username']);
+													}else{
+														echo 'Category Not Found';
+													}
 													}
 												}
 												?>

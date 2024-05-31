@@ -26,7 +26,6 @@ class CategoryMapper implements Mapper{
         $values ="";
         $conn = CategoryMapper::getDBConnection();
         $arrayOfAttributes = MapperHelper::extractData(self::$columns, $object);
-        print_r($arrayOfAttributes);
         foreach ($arrayOfAttributes as $key => $value) {
             $columns .= "$key, ";
             $values .= "'$value', ";        
@@ -34,7 +33,6 @@ class CategoryMapper implements Mapper{
         $columns = rtrim($columns, ', ');
         $values = rtrim($values, ', ');
         $query = "INSERT INTO ".self::$tableName." ($columns) VALUES ($values)";
-        echo '<br>'.$query.'<br>';
         return $conn->query($query);
     }
     public static function edit($uniqueIdentifier, $arrOfKeyValue, $UniqueIdentifierName){
@@ -57,15 +55,14 @@ class CategoryMapper implements Mapper{
         $connection = self::getDbConnection();
     
         // delete sub first
-        $subcategories = SubCategoryMapper::selectObjectAsArray($uniqueIdentifier, 'Category_id');
-        if ($subcategories !== false) {
-            foreach ($subcategories as $subcategory) {
-                $subcategoryId = $subcategory['id'];
-                SubCategoryMapper::delete($subcategoryId, 'id');
-            }
-        }
-        $sql = "DELETE FROM " . self::$tableName . " WHERE " . $UniqueIdentifierName . " = " . $uniqueIdentifier;
-    
+        $subcategories = SubCategoryMapper::selectall();
+        // if ($subcategories !== false) {
+        //     foreach ($subcategories as $subcategory) {
+        //         $subcategoryId = $subcategory['id'];
+        //         SubCategoryMapper::delete($subcategoryId, 'id');
+        //     }
+        // }
+        $sql = "DELETE FROM " . self::$tableName . " WHERE " . $UniqueIdentifierName . " = '" . $uniqueIdentifier . "'";
         if ($connection->query($sql) === TRUE) {
             return true;
         } else {

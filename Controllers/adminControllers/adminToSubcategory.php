@@ -3,15 +3,13 @@ require_once '../Controllers/UserControllers/userMapper.php';
 require_once '../Models/Subcategory.php';
 require_once 'C:\xampp\htdocs\Winku-aya-s_branch\Controllers\subcategoryControllers\SubCategoryMapper.php';
 require_once 'C:\xampp\htdocs\Winku-aya-s_branch\Controllers\categoryControllers\CategoryMapper.php';
+require_once 'C:\xampp\htdocs\Winku-aya-s_branch\Controllers\categoryControllers\CategoryControllersHelper.php';
 // require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\subcategoryControllers\SubCategoryMapper.php';
 // require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\categoryControllers\CategoryMapper.php';
 
 class adminToSubcategory {
 
     public function addSubCategory( $Subcategoryname,$Categoryname) { 
-        if ( $_SESSION || !$_SESSION['username']) {
-            session_start();
-        }
         
         $Category_id = CategoryMapper::selectSpecificAttr($Categoryname, 'name', 'id');
         $Subcategory =new Subcategory($Subcategoryname,$_SESSION['username'],$Category_id);
@@ -20,7 +18,7 @@ class adminToSubcategory {
 
         if ($result) {
             // increase numOfSubcategories in Category table
-            CategoryControllersHelper::incrementDataDB($Category_id ,'id', 'NumOfSubcategories' ); 
+            CategoryControllersHelper::incrementDataDB($Category_id ,'id', 'numOfSubcategories' ); 
             echo "Sub_Category added successfully";
          
      } else {

@@ -32,15 +32,7 @@ if ($_SESSION['id'] !== '') {
 								<div class="col-lg-3">
 									<aside class="sidebar static">
 										<div class="widget">
-											<h4 class="widget-title">Followed categories</h4>
-											<ul class="naves">
-											<?php
-												$categories = CategoryusersMapper::getUserFollowedCategories($_SESSION['id']);
-												foreach ($categories as $category) {
-													echo '<li><a href="subcategories.php?subcategoryId=' . $category['id'] . '">' . $category['name'] . '</a></li>';
-												}
-												?>											
-											</ul>
+											<?php require_once 'C:\xampp\htdocs\Winku-aya-s_branch\Views\followed_categories_or_all_categories.php' ?>											
 										</div><!-- Shortcuts -->										
 									</aside>
 								</div><!-- sidebar -->
@@ -70,16 +62,21 @@ if ($_SESSION['id'] !== '') {
 													<select name="subcategoryId">
 													<?php
 													$subcategories = SubCategoryUsersMapper::getUserJoinedSubategories($_SESSION['id']);
-													foreach ($subcategories as $subcategory) {
-														echo '<option value=' . $subcategory['id'] . '">' . $subcategory['name'] . '</option>';
-													}
+                                                    if ($subcategories) {
+                                                        foreach ($subcategories as $subcategory) {
+                                                            if ($subcategory['subcategoryId'] == $question['subcategoryId']) {
+                                                                echo '<option value=' . $subcategory['id'] . '" selected>' . $subcategory['name'] . '</option>';
+                                                                continue;
+                                                            }
+                                                            echo '<option value=' . $subcategory['id'] . '">' . $subcategory['name'] . '</option>';
+                                                        }      
+                                                        echo '<option value="">Not to specific subcategory</option>';                                             
+                                                    }
+                                                    else{
+                                                        echo '<option value="" selected>Not to specific subcategory</option>';
+                                                    }
 														?>	
-														<!-- <option value="1">Normal Question</option>
-														<option value="2">Mobile App Development</option>
-														<option value="3">Web Development</option> -->
-														<!-- Add more options for other subcategories -->
 													</select>
-
                                                     <button style="border-radius: 10px;" name="submit" class="mt-4" type="submit">Ask</button>
 												</form>
 											</div>

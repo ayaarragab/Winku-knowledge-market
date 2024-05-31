@@ -1,11 +1,8 @@
 <?php
-// require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\Mapper\mapperHelper.php';
-// require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\Mapper\mapperInterface.php';
-// require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\database\dbConnection.php';
 require_once 'C:\xampp\htdocs\Winku-aya-s_branch\Controllers\Mapper\mapperHelper.php';
 require_once 'C:\xampp\htdocs\Winku-aya-s_branch\Controllers\Mapper\mapperInterface.php';
 require_once 'C:\xampp\htdocs\Winku-aya-s_branch\Controllers\database\dbConnection.php';
-
+require_once 'C:\xampp\htdocs\Winku-aya-s_branch\Models\Admin.php';
 
 /**
  * This class is responsible for mapping user data between the database and the application.
@@ -235,8 +232,15 @@ class UserMapper implements Mapper{
         elseif ($UniqueIdentifierName == 'username') {
             $userArr = self::selectObjectAsArray($uniqueIdentifier, 'username');
         }
-        $user = new User($userArr[0]['fullName'], $userArr[0]['username'], $userArr[0]['gender'], $userArr[0]['email'], $userArr[0]['password']);
-        return $user;
+        if (!isset($userArr[0]['adminOrNot'])) {
+            $user = new User($userArr[0]['fullName'], $userArr[0]['username'], $userArr[0]['gender'], $userArr[0]['email'], $userArr[0]['password']);
+            return $user;
+        }
+        else{
+            $admin = new Admin($userArr[0]['username'], $userArr[0]['email'], $userArr[0]['password']);
+
+            return $admin;
+        }
     }
 
 }

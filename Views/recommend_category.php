@@ -32,22 +32,6 @@ if (isset($_SESSION) && isset($_POST['category_name']) && isset($_POST['category
 				<div class="row">
 					<div class="col-lg-9">
 						<div class="forum-warper">
-							<div class="post-filter-sec">
-								<form method="post" class="filter-form">
-									<input type="post" placeholder="Search post">
-									<button><i class="ti-search"></i></button>
-								</form>
-								<div class="purify">
-									<span>filter by</span>
-									<select>
-										<option>Assending A-Z</option>
-										<option>Desending Z-A</option>
-										<option>Desending (date)</option>
-										<option>Asending (date)</option>
-									</select>
-									<a href="#" title="">purify</a>
-								</div>
-							</div>
 						</div>
 						<div class="forum-form">
 							<h5 class="f-title"><i class="ti-info-alt"></i>Recommend a category</h5>

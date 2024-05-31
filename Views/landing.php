@@ -63,7 +63,7 @@ if(isset($_POST["Register"]))
 					<div class="log-reg-area sign">
 						<h2 class="log-title">Login</h2>
 							<p>
-								Don’t use Winku Yet? <a href="#" title="">Take the tour</a> or <a href="#" title="">Join now</a>
+								Don’t use Winku Yet? <a href="index.php" title="">Take the tour</a> or <a href="#" title="">Join now</a>
 							</p>
 						<form method="post" >
 							<div class="form-group">	
@@ -97,7 +97,6 @@ if(isset($_POST["Register"]))
 							?>
 							<div class="submit-btns">
 								<input  type = "submit" id = "submit" name = "Login" value="Login">
-								<!--<button class="mtr-btn signin" type="button"><span>Login</span></button>-->
 								<button class="mtr-btn signup" type="button"><span>Register</span></button>
 							</div>
 						</form>
@@ -105,7 +104,7 @@ if(isset($_POST["Register"]))
 					<div class="log-reg-area reg">
 						<h2 class="log-title">Register</h2>
 							<p>
-								Don’t use Winku Yet? <a href="#" title="">Take the tour</a> or <a href="#" title="">Join now</a>
+								Don’t use Winku Yet? <a href="index.php" title="">Take the tour</a> or <a href="#" title="">Join now</a>
 							</p>
 						<form method="post">
 							<div class="form-group">	

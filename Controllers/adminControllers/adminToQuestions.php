@@ -30,22 +30,12 @@ class AdminToQuestions{
   
     public function deleteQuestion($questionId)
     {
-        try {
-            $sql = "DELETE FROM questions WHERE id = ?";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param('s', $questionId ); // 's' indicates a string parameter
-            $stmt->execute();
-    
-            // Check if any rows were affected
-            if ($stmt->affected_rows > 0) {
-                echo "question deleted successfully.";
-            } else {
-                echo "No question found with the given questionId.";
-            }
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
+        $conn = DBConnection::getConnection();
+
+        $sql = "DELETE FROM questions WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('s', $questionId ); // 's' indicates a string parameter
+        $stmt->execute();
     }
   
 }
-?>

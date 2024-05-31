@@ -41,11 +41,11 @@ class adminToCategory{
             // delete category
             $result = CategoryMapper::delete($categoryname, 'name');
         
-            if ($result) {
-                echo "Category deleted successfully";
-            } else {
-                echo "Error deleting Category";
-            }
+            // if ($result) {
+            //     echo "Category deleted successfully";
+            // } else {
+            //     echo "Error deleting Category";
+            // }
         }
     public function discardCategory($username){
         UserMapper::edit($username, array('suggestedCategory' => 'no categories suggested yet'), 'username');

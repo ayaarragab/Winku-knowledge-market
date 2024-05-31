@@ -14,22 +14,6 @@ require_once '../Models/Admin.php';
 				<div class="row">
 					<div class="col-lg-9">
 						<div class="forum-warper">
-							<div class="post-filter-sec">
-								<form method="post" class="filter-form">
-									<input type="post" placeholder="Search subcategory">
-									<button><i class="ti-search"></i></button>
-								</form>
-								<div class="purify">
-									<span>filter by</span>
-									<select>
-										<option>Assending A-Z</option>
-										<option>Desending Z-A</option>
-										<option>Desending (date)</option>
-										<option>Asending (date)</option>
-									</select>
-									<a href="#" title="">purify</a>
-								</div>
-							</div>
 							<?php
 							if (isset($_SESSION['username'])) {
 								echo '<a class="addnewforum" style="" href="create_a_subcategory.php?username='.$_SESSION['username'].'" title=""><i class="fa fa-plus"></i> Create a subcategory!</a>';

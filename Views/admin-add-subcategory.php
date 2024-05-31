@@ -16,18 +16,9 @@ require_once 'assests/admin-header-few-differences.php';
 									<aside class="sidebar static">
 										<div class="widget">
 											<h4 class="widget-title">Followed categories</h4>
-											<ul class="naves">
-												<li><a href="forums-category.html">Web Development</a></li>
-												<li><a href="forums-category.html">Mobile App Development</a></li>
-												<li><a href="forums-category.html">Artificial Intelligence</a></li>
-												<li><a href="forums-category.html">Data Science</a></li>
-												<li><a href="forums-category.html">Machine Learning</a></li>
-												<li><a href="forums-category.html">Blockchain Technology</a></li>
-												<li><a href="forums-category.html">Cloud Computing</a></li>
-												<li><a href="forums-category.html">DevOps</a></li>
-												<li><a href="forums-category.html">Game Development</a></li>
-												<li><a href="forums-category.html">UI/UX Design</a></li>												
-											</ul>
+											<?php
+											require_once 'C:\xampp\htdocs\Winku-aya-s_branch\Views\followed_categories_or_all_categories.php';
+											 ?>
 										</div><!-- Shortcuts -->										
 									</aside>
 								</div><!-- sidebar -->

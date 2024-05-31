@@ -55,8 +55,17 @@ if (/* isset($_SESSION['adminId']) */true) { // Assuming this condition is for a
 												  $numCategories = count(CategoryMapper::selectall());
 												  $numUsers = count(UserMapper::selectAllUsers());
 												  $numAnswers = 10; # will be replaced by sara function
-												  $numPrivilegedUsers = count(UserMapper::selectPrivilegedUsers()); # function
-												  $numSubcategories = count(SubCategoryMapper::selectall());
+												  if (UserMapper::selectPrivilegedUsers()) {
+													$numPrivilegedUsers = count(UserMapper::selectPrivilegedUsers()); # function
+												}
+												else{
+													$numPrivilegedUsers = 0;
+												}
+												if (SubCategoryMapper::selectall()) {
+													$numSubcategories = count(SubCategoryMapper::selectall());	
+												} else {
+													$numSubcategories = 0;
+												}
 											 ?>
 											<ul class="recent-photos">
 												<div class="one d-flex justify-content-center">

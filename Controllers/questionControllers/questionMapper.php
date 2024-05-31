@@ -14,7 +14,7 @@ class QuestionMapper implements Mapper{
                               'body',
                               'tags', 
                               'subcategoryId', 
-                              'numberOfReports',
+                              'numOfReports',
                               'title',
                               'numAnswers',
                             'numUpVotes',
@@ -76,17 +76,21 @@ class QuestionMapper implements Mapper{
         $conn = self::getDbConnection();
         $set = "";
         foreach ($arrOfKeyValue as $column => $value) {
+            // Escape single quotes in the value
+            $value = mysqli_real_escape_string($conn, $value);
             $set .= "$column = '$value', ";
         }
         $set = rtrim($set, ", ");
-        $query = "UPDATE ".self::$tableName." SET $set WHERE ".$UniqueIdentifierName." = ".$uniqueIdentifier;
+        $query = "UPDATE ".self::$tableName." SET $set WHERE ".$UniqueIdentifierName." = '".$uniqueIdentifier."'";
         // if ($query)
         //     echo "<br> data changed sucessfully! <br>";
         // else {
         //     echo "<br> can't update it in db <br>";
         // }
+        // echo $query; // For debugging
         return $conn->query($query);
     }
+    
     public static function delete($uniqueIdentifier, $UniqueIdentifierName){
         $connection = self::getDbConnection();
         $sql = "DELETE FROM ".self::$tableName." WHERE ".$UniqueIdentifierName." = ".$uniqueIdentifier;
@@ -97,7 +101,7 @@ class QuestionMapper implements Mapper{
             $questioncount= QuestionMapper::selectSpecificAttr($userid, 'id', 'numQuestions');
             if ($questioncount !== false) {
                 $questioncount = $questioncount-1;
-                CategoryMapper::edit($userid, ['numQuestions' => $questioncount], 'id');
+                UserMapper::edit($userid, ['numQuestions' => $questioncount], 'id');
             }
     
             return true;

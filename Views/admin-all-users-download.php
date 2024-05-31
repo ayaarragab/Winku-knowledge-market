@@ -1,3 +1,7 @@
+<?php
+require_once 'assests/admin-all-users-header.php';
+require_once '../Controllers/UserControllers/userMapper.php';
+require_once '../Controllers/adminControllers/adminToUsers.php'?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,221 +72,43 @@
     <thead>
     <tr>
     <th scope="col" class="border-0 text-uppercase font-medium pl-4">#</th>
-    <th scope="col" class="border-0 text-uppercase font-medium">Name</th>
-    <th scope="col" class="border-0 text-uppercase font-medium">Occupation</th>
-    <th scope="col" class="border-0 text-uppercase font-medium">Email</th>
-    <th scope="col" class="border-0 text-uppercase font-medium">Added</th>
-    <th scope="col" class="border-0 text-uppercase font-medium">Category</th>
-    <th scope="col" class="border-0 text-uppercase font-medium">Manage</th>
+<th scope="col" class="border-0 text-uppercase font-medium">Fullname</th>
+<th scope="col" class="border-0 text-uppercase font-medium">username</th>
+<th scope="col" class="border-0 text-uppercase font-medium">Email</th>
+<th scope="col" class="border-0 text-uppercase font-medium">reputations</th>
+<th scope="col" class="border-0 text-uppercase font-medium">Questions</th>
+<th scope="col" class="border-0 text-uppercase font-medium">Reports</th>
+<th scope="col" class="border-0 text-uppercase font-medium">controll</th>
     </tr>
     </thead>
     <tbody>
-    <tr>
-    <td class="pl-4">1</td>
-    <td>
-    <h5 class="font-medium mb-0">Daniel Kristeen</h5>
-    <span class="text-muted">Texas, Unitedd states</span>
-    </td>
-    <td>
-    <span class="text-muted">Visual Designer</span><br>
-    <span class="text-muted">Past : teacher</span>
-    </td>
-    <td>
-    <span class="text-muted"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1074717e79757c50677572637964753e737f7d">[email&#160;protected]</a></span><br>
-    <span class="text-muted">999 - 444 - 555</span>
-    </td>
-    <td>
-    <span class="text-muted">15 Mar 1988</span><br>
-    <span class="text-muted">10: 55 AM</span>
-    </td>
-    <td>
-    <select class="form-control category-select" id="exampleFormControlSelect1">
-    <option>Modulator</option>
-    <option>Admin</option>
-    <option>User</option>
-    <option>Subscriber</option>
-    </select>
-    </td>
-    <td>
-    <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle"><i class="fa fa-key"></i> </button>
-    <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-trash"></i> </button>
-    <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-edit"></i> </button>
-    <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-upload"></i> </button>
-    </td>
-    </tr>
-    <tr>
-    <td class="pl-4">2</td>
-    <td>
-    <h5 class="font-medium mb-0">Emma Smith</h5>
-    <span class="text-muted">Texas, Unitedd states</span>
-    </td>
-    <td>
-    <span class="text-muted">Visual Designer</span><br>
-    <span class="text-muted">Past : teacher</span>
-    </td>
-    <td>
-    <span class="text-muted"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="85e1e4ebece0e9c5f2e0e7f6ecf1e0abe6eae8">[email&#160;protected]</a></span><br>
-    <span class="text-muted">999 - 444 - 555</span>
-    </td>
-    <td>
-    <span class="text-muted">15 Mar 1855</span><br>
-    <span class="text-muted">10: 00 AM</span>
-    </td>
-    <td>
-    <select class="form-control category-select" id="exampleFormControlSelect1">
-    <option>Modulator</option>
-    <option>Admin</option>
-    <option>User</option>
-    <option>Subscriber</option>
-    </select>
-    </td>
-    <td>
-    <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle"><i class="fa fa-key"></i> </button>
-    <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-trash"></i> </button>
-    <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-edit"></i> </button>
-    <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-upload"></i> </button>
-    </td>
-    </tr>
-    <tr>
-    <td class="pl-4">3</td>
-    <td>
-    <h5 class="font-medium mb-0">Olivia Johnson</h5>
-    <span class="text-muted">Texas, Unitedd states</span>
-    </td>
-    <td>
-    <span class="text-muted">Visual Designer</span><br>
-    <span class="text-muted">Past : teacher</span>
-    </td>
-    <td>
-    <span class="text-muted"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="86e2e7e8efe3eac6f1e3e4f5eff2e3a8e5e9eb">[email&#160;protected]</a></span><br>
-    <span class="text-muted">999 - 444 - 555</span>
-    </td>
-    <td>
-    <span class="text-muted">17 Aug 1988</span><br>
-    <span class="text-muted">12: 55 AM</span>
-    </td>
-    <td>
-    <select class="form-control category-select" id="exampleFormControlSelect1">
-    <option>Modulator</option>
-    <option>Admin</option>
-    <option>User</option>
-    <option>Subscriber</option>
-    </select>
-    </td>
-    <td>
-    <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle"><i class="fa fa-key"></i> </button>
-    <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-trash"></i> </button>
-    <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-edit"></i> </button>
-    <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-upload"></i> </button>
-    </td>
-    </tr>
-    <tr>
-    <td class="pl-4">4</td>
-    <td>
-    <h5 class="font-medium mb-0">Isabella Williams</h5>
-    <span class="text-muted">Texas, Unitedd states</span>
-    </td>
-    <td>
-    <span class="text-muted">Visual Designer</span><br>
-    <span class="text-muted">Past : teacher</span>
-    </td>
-    <td>
-    <span class="text-muted"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="096d6867606c65497e6c6b7a607d6c276a6664">[email&#160;protected]</a></span><br>
-    <span class="text-muted">999 - 444 - 555</span>
-    </td>
-    <td>
-    <span class="text-muted">26 Mar 1999</span><br>
-    <span class="text-muted">10: 55 AM</span>
-    </td>
-    <td>
-    <select class="form-control category-select" id="exampleFormControlSelect1">
-    <option>Modulator</option>
-    <option>Admin</option>
-    <option>User</option>
-    <option>Subscriber</option>
-    </select>
-    </td>
-    <td>
-    <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle"><i class="fa fa-key"></i> </button>
-    <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-trash"></i> </button>
-    <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-edit"></i> </button>
-    <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-upload"></i> </button>
-    </td>
-    </tr>
-    <tr>
-    <td class="pl-4">5</td>
-    <td>
-    <h5 class="font-medium mb-0">Sophia Jones</h5>
-    <span class="text-muted">Texas, Unitedd states</span>
-    </td>
-    <td>
-    <span class="text-muted">Visual Designer</span><br>
-    <span class="text-muted">Past : teacher</span>
-    </td>
-    <td>
-    <span class="text-muted"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="177376797e727b57607275647e63723974787a">[email&#160;protected]</a></span><br>
-    <span class="text-muted">999 - 444 - 555</span>
-    </td>
-    <td>
-    <span class="text-muted">16 Aug 2001</span><br>
-    <span class="text-muted">10: 55 AM</span>
-    </td>
-    <td>
-    <select class="form-control category-select" id="exampleFormControlSelect1">
-    <option>Modulator</option>
-    <option>Admin</option>
-    <option>User</option>
-    <option>Subscriber</option>
-    </select>
-    </td>
-    <td>
-    <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle"><i class="fa fa-key"></i> </button>
-    <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-trash"></i> </button>
-    <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-edit"></i> </button>
-    <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-upload"></i> </button>
-    </td>
-    </tr>
-    <tr>
-    <td class="pl-4">6</td>
-    <td>
-    <h5 class="font-medium mb-0">Charlotte Brown</h5>
-    <span class="text-muted">Texas, Unitedd states</span>
-    </td>
-    <td>
-    <span class="text-muted">Visual Designer</span><br>
-    <span class="text-muted">Past : teacher</span>
-    </td>
-    <td>
-    <span class="text-muted"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="90f4f1fef9f5fcd0e7f5f2e3f9e4f5bef3fffd">[email&#160;protected]</a></span><br>
-    <span class="text-muted">999 - 444 - 555</span>
-    </td>
-    <td>
-    <span class="text-muted">15 Mar 1988</span><br>
-    <span class="text-muted">10: 55 AM</span>
-    </td>
-    <td>
-    <select class="form-control category-select" id="exampleFormControlSelect1">
-    <option>Modulator</option>
-    <option>Admin</option>
-    <option>User</option>
-    <option>Subscriber</option>
-    </select>
-    </td>
-    <td>
-    <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle"><i class="fa fa-key"></i> </button>
-    <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-trash"></i> </button>
-    <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-edit"></i> </button>
-    <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-upload"></i> </button>
-    </td>
-    </tr>
-    </tbody>
-    </table>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </section>
+	<?php
+		$users = UserMapper::selectAllUsers();
+		for ($i=0; $i < count($users); $i++) { 
+			echo '<tr>';
+			echo '<td>'.$users[$i]['id'].'</td>';
+			echo '<td><h5 class="font-medium mb-0">'.$users[$i]['fullName'].'</h5>';
+			echo '<span class="text-muted">'.$users[$i]['country'].'</span></td>';
+			echo '<td><span class="text-muted">'.$users[$i]['username'].'</span></td>';
+			echo '<td><span class="text-muted">'.$users[$i]['email'].'</span></td>';
+			echo '<td><span class="text-muted">'.$users[$i]['reputations'].'</span></td>';
+			echo '<td><span class="text-muted">'.$users[$i]['numQuestions'].'</span></td>';
+			echo '<td><span class="text-muted">'.$users[$i]['numberOfReports'].'</span></td>';
+			echo '<td><a href="admin-all-users.php?function=deleteUser&userId='.$users[$i]['id'].'"><button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-trash"></i></button></a></td>';
+
+		}
+		if (isset($_GET['function']) && $_GET['function'] == ) {
+			# I'll put this
+		}
+	 ?>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">

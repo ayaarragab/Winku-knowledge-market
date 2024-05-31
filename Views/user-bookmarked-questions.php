@@ -1,32 +1,63 @@
 <?php session_start();
-include('assests/header.php')
+include('assests/header.php');
+require_once '../Controllers/UserControllers/userMapper.php';
+require_once 'C:\xampp\htdocs\Winku-aya-s_branch\Controllers\Mapper\mapper.php';
+$user = UserMapper::selectObjectAsArray($_GET['id'], 'id');
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['follow'])) {
+        echo "follow"; // Just for testing purposes
+        UserToUser::followUser($_GET['id']);
+    }
+    if (isset($_POST['unfollow'])) {
+        UserToUser::unfollowUser($_GET['id']);
+    }
+    if (isset($_POST['report'])) {
+        UserToUser::reportUser($user[0]['username']);
+    }
+}
 ?>
 	<section>
   
-		<div class="feature-photo">
+	<div class="feature-photo">
 			<div class="add-btn">
-				<span>1205 followers</span>
-        <form class="d-inline" action="" method="post">
-          <input class="add-f btn" type="submit" name="follow" value="follow" />
-        </form>
+			<span>Followers: <?php echo $user[0]['numFollowers']; ?></span>
+			
+
       </div>
 			<div class="container-fluid">
 				<div class="row merged">
 					<div class="col-lg-2 col-sm-3">
 						<div class="user-avatar">
 							<figure>
-								<img src="images/resources/user-avatar.jpg" alt="">
-								<form class="edit-phto">
-									<i class="fa fa-camera-retro"></i>
-									<label class="fileContainer">
-										Edit Display Photo
-										<input type="file"/>
-									</label>
-								</form>
+								<img src="<?php echo $user[0]['profilePhoto']; ?>" alt="">
+								<?php if($_GET['id']==$_SESSION['id'])
+								{?>
+									<form class="edit-phto">
+										<i class="fa fa-camera-retro"></i>
+										<label class="fileContainer">
+											Edit Display Photo
+											<input type="file"/>
+										</label>
+									</form>
+								<?php }?>
 							</figure>
 						</div>
-					</div>
-					
+						<?php if($_GET['id'] !== $_SESSION['id'])
+								{?>
+									<form class="d-inline" action="" method="post">
+									<?php if ($_GET['id'] !== $_SESSION['id']) : ?>
+									<?php
+									$check = userfollowermapper::searchAttributeWithOther($_GET['id'], 'followerId', $_SESSION['id'], 'userId');
+									if ($check) : ?>
+										<button class="add-f btn" type="submit" name="unfollow">unfollow</button>
+									<?php else : ?>
+										<button class="add-f btn" type="submit" name="follow">follow</button>
+									<?php endif; ?>
+									<button class="add-f btn" type="submit" name="report">report</button>
+									<?php endif; ?>
+									</form>
+						<?php }?>
+					</div><?php require_once 'assests/profile-constant-section.php' ?>
 
 		
 	<section>
@@ -170,14 +201,24 @@ include('assests/header.php')
                             <div class="col-lg-6">
 								<?php include_once 'C:\xampp\htdocs\Winku-aya-s_branch\Controllers\associativeClasses\bookmarkedQuestions\bookmarkMapper.php';
 								include_once 'C:\xampp\htdocs\Winku-aya-s_branch\Controllers\questionControllers\questionToUser.php';
-									$userId=$_SESSION['id'];
-									$qustionIds=bookmarkMapper::selectObjectAsArray($userId,'userId');
-									if($qustionIds!==false){
-										for($i=count($qustionIds) - 1; $i >= 0; $i--){
-										questionToUser::showBYQuestionId($questionIds[$i],$_SESSION['username']);}
+									if($_SESSION['id']==$_GET['id']){
+										$userId=$_SESSION['id'];
+										$questionIds=bookmarkMapper::selectObjectAsArray2($userId,'userId');
+										echo"1";
+
+										if($questionIds!==false){
+											
+											for($i=count($questionIds) - 1; $i >= 0; $i--){
+											$hisQuestion=($_SESSION['id']==$userId)?true:false;
+											questionToUser::showBYQuestionId($questionIds[$i]['questionId'],$hisQuestion);}
+										}
+									}
+									else{
+										echo'<h4>Sorry , its locked</h4>';
 									}
 								?>
                                 <!-- We'll design it -->
+								
                             </div>
                             <!-- centerl meta -->
 							<div class="col-lg-3">

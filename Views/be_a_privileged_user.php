@@ -1,6 +1,7 @@
 <?php 
 session_start();
 include_once('assests/header.php'); 
+require_once '..\Controllers\UserControllers\UserToSystem.php';
 require_once 'C:\xampp\htdocs\Winku-aya-s_branch\Controllers\associativeClasses\categoryUser\categoryusersMapper.php';
 ?>
 
@@ -13,26 +14,7 @@ require_once 'C:\xampp\htdocs\Winku-aya-s_branch\Controllers\associativeClasses\
 								<div class="col-lg-3">
 									<aside class="sidebar static">
 										<div class="widget">
-											<ul class="naves">
-											<?php
-												if (isset($_SESSION['id'])) {
-													echo '<h4 class="widget-title">Followed categories</h4>';
-													echo '<ul class="naves">';
-													$categories = CategoryusersMapper::getUserFollowedCategories($_SESSION['id']);
-													foreach ($categories as $category) {
-														echo '<li><a href="subcategories.php?categoryId=' . $category['id'] . '">' . $category['name'] . '</a></li>';
-													}}
-												else {
-													echo '<h4 class="widget-title">Categories</h4>';
-													echo '<ul class="naves">';
-													$categories = CategoryMapper::selectall();
-													foreach ($categories as $category) {
-														// echo '<li><a href="subcategories.php?categoryId=' . $category['id'] . '">' . $category['name'] . '</a></li>';
-														echo '<li><a href="landing.php">' . $category['name'] . '</a></li>';
-													}
-												}
-												?>														
-											</ul>
+										<?php require_once 'C:\xampp\htdocs\Winku-aya-s_branch\Views\followed_categories_or_all_categories.php' ?>
 										</div><!-- Shortcuts -->										
 									</aside>
 								</div><!-- sidebar -->
@@ -43,9 +25,25 @@ require_once 'C:\xampp\htdocs\Winku-aya-s_branch\Controllers\associativeClasses\
 											<div class="newpst-input">
 												<form action="" method="POST">
                                                     <h5 style="color: black; font-weight: bold;" >Please write your professional email:</h5>
-													<textarea  name="body" rows="1" style="font-size: large;" placeholder="JSmith@google.com"></textarea>
+													<input type="email" id="professionalemail" name="professionalemail" >
                                                     <button style="border-radius: 10px;" name="submit" class="mt-4" type="submit">Verify</button>
 												</form>
+												<?php 
+												if(isset($_POST['submit'])){
+													$email=Authenticator::checkInput($_POST['professionalemail']);
+													if(isset($email)){
+														$result= UserToSystem::verifyMyAccount($_POST['professionalemail']);
+														if($result)
+														{
+															echo "You privilege user Now!!";
+														}else{
+															echo "Sorry you can't be privilege user";
+														}
+
+													}
+												}	
+												
+												?>
 											</div>
 										</div>
 									</div><!-- add post new box -->

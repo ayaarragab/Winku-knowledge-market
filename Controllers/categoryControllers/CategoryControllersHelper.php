@@ -5,7 +5,7 @@ class CategoryControllersHelper{
     {
         $value = intval(CategoryMapper::selectSpecificAttr($uniqueIdentifier ,$UniqueIdentifierName, $columnName));
         if (is_int($value)) {
-            CategoryMapper::edit($$uniqueIdentifier, array($columnName => ++$value),$UniqueIdentifierName);
+            CategoryMapper::edit($uniqueIdentifier, array($columnName => ++$value),$UniqueIdentifierName);
         }
         else {
             echo 'Error in updating data';
@@ -16,7 +16,7 @@ class CategoryControllersHelper{
     {
         $value = intval(CategoryMapper::selectSpecificAttr($uniqueIdentifier ,$UniqueIdentifierName, $columnName));
         if (is_int($value)) {
-            CategoryMapper::edit($$uniqueIdentifier, array($columnName => --$value),$UniqueIdentifierName);
+            CategoryMapper::edit($uniqueIdentifier, array($columnName => --$value),$UniqueIdentifierName);
         }
         else {
             echo 'Error in updating data';

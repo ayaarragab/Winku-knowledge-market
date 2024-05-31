@@ -36,6 +36,7 @@ class Authenticator{
                     }
                     if (isset($objArr[0]['adminOrNot']) && $objArr[0]['adminOrNot'] == 1) {
                         $_SESSION['adminOrNot'] = 1;
+                        $_SESSION['admin'] = serialize($admin);
                         header('Location: ..\Views\admin_dashboard.php');
                     }
                 } else {

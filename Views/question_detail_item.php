@@ -7,8 +7,7 @@
             </div>
             <div class="d-flex ff">
                 <ul id="op-list" class="options-list" style="display: none;">';
-                    echo '<li><i class="fa-solid fa-pen"></i><span class="p-2">Edit</span></li>
-                          <li><i class="fa-solid fa-trash"></i><span class="p-2">Delete</span></li>';
+                    echo '<a href="question_detail_admin.php?function=deleteQuestion&id='.$question[0]['id'].'"><li><i class="fa-solid fa-trash"></i><span class="p-2">Delete</span></li></a>';
                 echo '</ul>
             </div>
             <div class="friend-info">

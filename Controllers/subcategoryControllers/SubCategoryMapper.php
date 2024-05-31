@@ -37,7 +37,6 @@ class SubCategoryMapper implements Mapper{
         $columns = rtrim($columns, ', ');
         $values = rtrim($values, ', ');
         $query = "INSERT INTO " . self::$tableName . " ($columns) VALUES ($values)";
-        echo '<br>'.$query.'<br>';
         if ($conn->query($query) === TRUE) {
             // Return the last inserted ID
             return $conn->insert_id;
@@ -69,7 +68,7 @@ class SubCategoryMapper implements Mapper{
     public static function delete($uniqueIdentifier, $UniqueIdentifierName){
         $connection = self::getDbConnection();
         $sql = "DELETE FROM ".self::$tableName." WHERE ".$UniqueIdentifierName." = ".$uniqueIdentifier;
-    
+        echo 'heyyy';
         if ($connection->query($sql) === TRUE) {
             // Decrease numOfSubcategories in Category table
             $categoryId = $uniqueIdentifier;

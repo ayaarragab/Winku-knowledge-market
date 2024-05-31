@@ -1,5 +1,10 @@
 <?php
 require_once 'assests/admin-header-few-differences.php';
+require_once '../Controllers/UserControllers/userMapper.php';
+require_once '../Controllers/categoryControllers/CategoryMapper.php';
+require_once '../Models/User.php';
+require_once '../Controllers/associativeClasses/categoryUser/Category_Users.php';
+require_once '../Controllers/associativeClasses/categoryUser/categoryusersMapper.php';
 ?>	
 	<section>
 		<div class="gap100">
@@ -7,22 +12,6 @@ require_once 'assests/admin-header-few-differences.php';
 				<div class="row">
 					<div class="col-lg-9">
 						<div class="forum-warper">
-							<div class="post-filter-sec">
-								<form method="post" class="filter-form">
-									<input type="post" placeholder="Search category">
-									<button><i class="ti-search"></i></button>
-								</form>
-								<div class="purify">
-									<span>filter by</span>
-									<select>
-										<option>Assending A-Z</option>
-										<option>Desending Z-A</option>
-										<option>Desending (date)</option>
-										<option>Asending (date)</option>
-									</select>
-									<a href="#" title="">purify</a>
-								</div>
-							</div>
                             <a class="addnewforum" style="" href="admin_add_a_category.php" title=""><i class="fa fa-plus"></i> Add a category</a>
 						</div>
 						<div class="forum-list">
@@ -32,27 +21,40 @@ require_once 'assests/admin-header-few-differences.php';
             <tr>
                 <th scope="col">Categories</th>
                 <th scope="col">Subcategories</th>
+				<th scope="col">Followers</th>
                 <th scope="col">Questions</th>
                 <th scope="col">Reports</th>
             </tr>
         </thead>
         <tbody>
+			<?php
+			if (isset($_GET['function']) && isset($_GET['categoryName'])) {
+				if ($_GET['function'] == 'deleteCategory') {
+					$admin = unserialize($_SESSION['admin']);
+					$admin->AdminToCategory->deleteCategory($_GET['categoryName']);
+				}
+			}
+			 ?>
             <!-- Repeat this block for each category -->
             <tr>
-                <td>
-					<div class="catName-and-follow-button user-post d-flex m-0 p-0">
-						<a style="margin-right:40px" href="subcategories.php?categoryId=<?php #$category['id'] ?>&adminOrNot=1"" title="">Mobile App Development</a>
-                        <a class="addnewforum p-1 follow-cat"  href="execute.php?function=&categoryId=&categoryName=" title=""><span style="color:white">delete</span></a>
-					</div>
-                    <!-- href="execute.php?function=&categoryId=<?php #$category['id'] ?>" -->
-                    <p class="p-0 m-0" >list your recommended website and when you start to create your website so please check your laptop window and battery &#58;-&#41;</p>
-                </td>
-                <td>4</td>
-                <td>5</td>
-                <td>0</td>
-            </tr>
-            <!-- End of category block -->
-            <!-- Repeat similar blocks for other categories -->
+			<?php
+				$categories = CategoryMapper::selectall();
+				if ($categories) {
+					for ($i=0; $i < count($categories); $i++) { 
+						echo '<tr>';
+						echo '<td>';
+						echo '<div class="catName-and-follow-button d-flex m-0 p-0">';
+						echo '<a href="subcategories.php?categoryId='.$categories[$i]['id'].'">'.$categories[$i]['name'].'</a>';
+						echo '<a class="addnewforum p-1 follow-cat"  href="admin-all-categories.php?function=deleteCategory&categoryName='.$categories[$i]['name'].'" title=""><span style="color:white">delete</span></a>';
+						echo '<p class="p-0 m-0" >'.$categories[$i]['description'].'</p>';
+						echo '</td>';
+						echo '<td>'.$categories[$i]['numOfSubcategories'].'</td>';
+						echo '<td>'.CategoryusersMapper::getNumFollowersPerCategory($categories[$i]['id']).'</td>';
+						echo '<td>'.$categories[$i]['numberOfQuestions'].'</td>';
+						echo '<td>'.$categories[$i]['numberOfreports'].'</td>';
+						echo '</tr>';
+			}		}
+				?>
         </tbody>
     </table>
 						</div>

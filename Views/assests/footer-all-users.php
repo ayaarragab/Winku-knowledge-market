@@ -135,17 +135,6 @@
 				</div>
 			</form>
 	</div><!-- side panel -->	
-		<div class="bottombar">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<span class="copyright"><a target="_blank" href="https://www.templateshub.net">Templates Hub</a></span>
-						<i><img src="images/credit-cards.png" alt=""></i>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 	<div class="side-panel right-dropdown-menu">
 			<h4 class="panel-title">General Setting</h4>
 			<form method="post">
@@ -216,5 +205,14 @@
 <script src="js/script.js"></script>
 <script src="js/map-init.js"></script>
 <script src="js/home.js" ></script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+	<script>
+		function googleTranslateElementInit(params) {
+			new google.translate.TranslateElement(
+				{pageLanguage: 'en'},
+				'google_translate_element'
+			);
+			}
+	</script>
 </body>
 </html>

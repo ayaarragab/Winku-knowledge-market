@@ -1,6 +1,12 @@
 <?php require_once 'assests/admin-header-few-differences.php'; 
 require_once '../Controllers/questionControllers/questionToAdmin.php';
 require_once 'C:\xampp\htdocs\Winku-aya-s_branch\Controllers\categoryControllers\CategoryMapper.php';
+require_once 'C:\xampp\htdocs\Winku-aya-s_branch\Controllers\questionControllers\questionToUser.php';
+require_once 'C:\xampp\htdocs\Winku-aya-s_branch\Controllers\UserControllers\userMapper.php';
+if (isset($_GET['function']) && $_GET['function'] == 'deleteQuestion') {
+	$admin = UserMapper::retrieveObject('id', $_SESSION['id']);
+	$admin->AdminToQuestions->deleteQuestion($_GET['id']);
+}
 ?>
 <section>
 			<div class="gap gray-bg">
@@ -26,7 +32,7 @@ require_once 'C:\xampp\htdocs\Winku-aya-s_branch\Controllers\categoryControllers
 								<div class="col-lg-6">
 									<div class="loadMore">
 									<h3 style="color: black; font-weight: bold;" >Users Questions</h3>
-									<?php questionToAdmin::showAllQuestionsToAdmin() ?>
+									<?php questionToUser::showAllQuestionsToAdmin() ?>
 									</div>
 								</div>
 								<div class="col-lg-3"></div><!-- centerl meta -->

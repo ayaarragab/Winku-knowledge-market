@@ -8,17 +8,13 @@ require_once '../Models/User.php';
 require_once '../Controllers/answerController/answerToUser.php';
 require_once 'C:\xampp\htdocs\Winku-aya-s_branch\Controllers\auth\Authenticator.php';
 require_once 'C:\xampp\htdocs\Winku-aya-s_branch\Controllers\associativeClasses\categoryUser\categoryusersMapper.php';
-// session_start();
-// include_once('assests/header.php');
-// require_once '../Controllers/questionControllers/questionToUser.php';
-// require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\associativeClasses\categoryUser\categoryusersMapper.php';
+require_once 'C:\xampp\htdocs\Winku-aya-s_branch\Controllers\associativeClasses\bookmarkedQuestions\bookmark.php';
+require_once 'C:\xampp\htdocs\Winku-aya-s_branch\Controllers\associativeClasses\bookmarkedQuestions\bookmarkMapper.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
 	Authenticator::check_login();
 	$body = $_POST['body'];
 	$qustionId=$_POST['question_id'];
 	$question_username=$_POST['question_username'];
-	//echo'..........';
-	//$objArr = UserMapper::selectObjectAsArray($_SESSION['id'], 'id');
 	$user = unserialize($_SESSION['user']);
 	//print_r($user);
 	// Instantiate UserToQuestion class and call addQuestion method
@@ -35,49 +31,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
 									<aside class="sidebar static">
 										<div class="widget">
 										<?php
-												if (isset($_SESSION['id'])) {
-													echo '<h4 class="widget-title">Followed categories</h4>';
-													echo '<ul class="naves">';
-													$categories = CategoryusersMapper::getUserFollowedCategories($_SESSION['id']);
-													foreach ($categories as $category) {
-														echo '<li><a href="subcategories.php?categoryId=' . $category['id'] . '">' . $category['name'] . '</a></li>';
-													}}
-												else {
-													echo '<h4 class="widget-title">Categories</h4>';
-													echo '<ul class="naves">';
-													$categories = CategoryMapper::selectall();
-													foreach ($categories as $category) {
-														echo '<li><a href="subcategories.php?categoryId=' . $category['id'] . '">' . $category['name'] . '</a></li>';
-													}
-												}
-												?>												
-											</ul>
+											require_once 'C:\xampp\htdocs\Winku-aya-s_branch\Views\followed_categories_or_all_categories.php';
+											 ?>
 										</div><!-- Shortcuts -->										
 									</aside>
 								</div><!-- sidebar -->
 								<div class="col-lg-6">
 									<div class="loadMore">
 									<?php
-									print_r($_POST);
-									if (isset($_POST['question_id']) && isset($_POST['react_type'])) {
-										echo 'can you hear me?';
-										if ($_POST['question_id'] == $_GET['id'] && $_POST['react_type'] == 'upvote') {
-											UserReactsQuestion::addUpVoteToDb($_SESSION['id'], $_GET['id']);
+										if (isset($_GET['function']) && $_GET['function'] == 'deleteQuestion') {
+											$user = unserialize($_SESSION['user']);
+											$user->userToQuestion->deleteQuestion($_GET['id']);
 										}
-										elseif ($_POST['question_id'] == $_GET['id'] && $_POST['react_type'] == 'downVote') {
-											UserReactsQuestion::addDownVoteToDb($_SESSION['id'], $_GET['id']);
+										elseif (isset($_GET['function']) && $_GET['function'] == 'bookmarkQuestion') {
+											$user = unserialize($_SESSION['user']);
+											$user->userToQuestion->bookmarkQuestion($_GET['id'], $_SESSION['id']);	
 										}
-									}
-										// if (isset( $_SESSION['id']) && $_GET['function'] == 'showOneQuestion' && $_SESSION['username'] == $_GET['username']) {
-										// 	questionToUser::showOneQuestion($_GET['id'], true, true);
-										// }
-										// elseif (isset( $_SESSION['id']) && $_GET['function'] == 'showOneQuestion' && $_SESSION['username'] != $_GET['username']) {
-										// 	# code...
-										// }
-										// require_once 'answer_check.php';
+										elseif (isset($_GET['function']) && $_GET['function'] == 'unbookmarkQuestion') {
+											$user = unserialize($_SESSION['user']);
+											$user->userToQuestion->unbookmarkQuestion($_GET['id'], $_SESSION['id']);	
+										}
+										elseif (isset($_GET['function']) && $_GET['function'] == 'reportQuestion') {
+											$user = unserialize($_SESSION['user']);
+											$user->userToQuestion->reportQuestion($_GET['id']);	
+										}
+										require_once 'get_reacts_handelling.php';
 										require_once 'answer_check.php';
-										// answerToUser::showAllquestionAnswers($_GET['id']);
-										ob_end_flush();
 										 ?>
 								</div>
 								<div class="col-lg-3"></div>

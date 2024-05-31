@@ -117,11 +117,17 @@ class SubCategoryUsersMapper implements Mapper{
     public static function getUserJoinedSubategories($userId){
         $categories = SubCategoryMapper::selectall();
         $categoriesArr = array();
-        for ($i=0; $i < count($categories); $i++) { 
-            if (self::isJoined($userId, $categories[$i]['id'])) {
-                array_push($categoriesArr, $categories[$i]);
+        if ($categories) {
+            for ($i=0; $i < count($categories); $i++) { 
+                if (self::isJoined($userId, $categories[$i]['id'])) {
+                    array_push($categoriesArr, $categories[$i]);
+                }
             }
+            if (!empty($categoriesArr)) {
+                return $categoriesArr;
+            }        }
+        else {
+            return false;
         }
-        return $categoriesArr;
     }
 }
