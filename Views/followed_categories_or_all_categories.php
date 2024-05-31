@@ -1,5 +1,5 @@
 <?php
-												if (isset($_SESSION['id'])) {
+											if (isset($_SESSION['id'])) {
                                                     if (isset($_SESSION['adminOrNot'])) {
                                                         echo '<h4 class="widget-title">Categories</h4>';
                                                         echo '<ul class="naves">';
